@@ -1,7 +1,3 @@
-cd "C:\Engineering\Programming II"
-git clone https://github.com/Refaat29/Lab-7.git Lab-7-repo
-cd Lab-7-repopackage service;
-
 import model.Department;
 
 public class Validator {
