@@ -32,9 +32,8 @@ public class AddEmployeePanel extends JPanel {
     private final JTextField hoursWorkedField;
 
     public AddEmployeePanel(EmployeeManager employeeManager, DepartmentManager departmentManager) {
-        if (employeeManager == null || departmentManager == null) {
+        if (employeeManager == null || departmentManager == null)
             throw new IllegalArgumentException("Both managers are required.");
-        }
         this.employeeManager = employeeManager;
         this.departmentManager = departmentManager;
         this.employeeManager.setDepartmentManager(departmentManager);
@@ -50,16 +49,22 @@ public class AddEmployeePanel extends JPanel {
         ageField = new JTextField();
         positionField = new JTextField();
         departmentCombo = new JComboBox<>();
-        typeCombo = new JComboBox<>(new String[]{Validator.FULL_TIME, Validator.PART_TIME});
+        typeCombo = new JComboBox<>(new String[] { Validator.FULL_TIME, Validator.PART_TIME });
 
         JPanel employeeFields = new JPanel(new GridLayout(0, 2, 5, 5));
         employeeFields.setBorder(BorderFactory.createTitledBorder("Employee Information"));
-        employeeFields.add(new JLabel("Employee ID")); employeeFields.add(idField);
-        employeeFields.add(new JLabel("Full name")); employeeFields.add(nameField);
-        employeeFields.add(new JLabel("Age")); employeeFields.add(ageField);
-        employeeFields.add(new JLabel("Position")); employeeFields.add(positionField);
-        employeeFields.add(new JLabel("Department")); employeeFields.add(departmentCombo);
-        employeeFields.add(new JLabel("Employee type")); employeeFields.add(typeCombo);
+        employeeFields.add(new JLabel("Employee ID"));
+        employeeFields.add(idField);
+        employeeFields.add(new JLabel("Full name"));
+        employeeFields.add(nameField);
+        employeeFields.add(new JLabel("Age"));
+        employeeFields.add(ageField);
+        employeeFields.add(new JLabel("Position"));
+        employeeFields.add(positionField);
+        employeeFields.add(new JLabel("Department"));
+        employeeFields.add(departmentCombo);
+        employeeFields.add(new JLabel("Employee type"));
+        employeeFields.add(typeCombo);
 
         basicSalaryField = new JTextField();
         bonusField = new JTextField();
@@ -68,13 +73,17 @@ public class AddEmployeePanel extends JPanel {
 
         JPanel fullTimeFields = new JPanel(new GridLayout(0, 2, 5, 5));
         fullTimeFields.setBorder(BorderFactory.createTitledBorder("Full-Time Salary"));
-        fullTimeFields.add(new JLabel("Basic monthly salary")); fullTimeFields.add(basicSalaryField);
-        fullTimeFields.add(new JLabel("Monthly bonus")); fullTimeFields.add(bonusField);
+        fullTimeFields.add(new JLabel("Basic monthly salary"));
+        fullTimeFields.add(basicSalaryField);
+        fullTimeFields.add(new JLabel("Monthly bonus"));
+        fullTimeFields.add(bonusField);
 
         JPanel partTimeFields = new JPanel(new GridLayout(0, 2, 5, 5));
         partTimeFields.setBorder(BorderFactory.createTitledBorder("Part-Time Salary"));
-        partTimeFields.add(new JLabel("Hourly rate")); partTimeFields.add(hourlyRateField);
-        partTimeFields.add(new JLabel("Hours worked per month")); partTimeFields.add(hoursWorkedField);
+        partTimeFields.add(new JLabel("Hourly rate"));
+        partTimeFields.add(hourlyRateField);
+        partTimeFields.add(new JLabel("Hours worked per month"));
+        partTimeFields.add(hoursWorkedField);
 
         salaryCards = new JPanel(new CardLayout());
         salaryCards.add(fullTimeFields, Validator.FULL_TIME);
@@ -179,7 +188,8 @@ public class AddEmployeePanel extends JPanel {
         hourlyRateField.setText("");
         hoursWorkedField.setText("");
         typeCombo.setSelectedItem(Validator.FULL_TIME);
-        if (departmentCombo.getItemCount() > 0) departmentCombo.setSelectedIndex(0);
+        if (departmentCombo.getItemCount() > 0)
+            departmentCombo.setSelectedIndex(0);
         nameField.requestFocusInWindow();
     }
 
@@ -190,9 +200,8 @@ public class AddEmployeePanel extends JPanel {
     public void refreshDepartments() {
         Department selectedDepartment = (Department) departmentCombo.getSelectedItem();
         departmentCombo.removeAllItems();
-        for (Department department : departmentManager.getAllDepartments()) {
+        for (Department department : departmentManager.getAllDepartments())
             departmentCombo.addItem(department);
-        }
         if (selectedDepartment != null) {
             for (int i = 0; i < departmentCombo.getItemCount(); i++) {
                 Department department = departmentCombo.getItemAt(i);
@@ -202,6 +211,7 @@ public class AddEmployeePanel extends JPanel {
                 }
             }
         }
-        if (departmentCombo.getItemCount() > 0) departmentCombo.setSelectedIndex(0);
+        if (departmentCombo.getItemCount() > 0)
+            departmentCombo.setSelectedIndex(0);
     }
 }

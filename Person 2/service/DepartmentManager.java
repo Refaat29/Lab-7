@@ -14,7 +14,8 @@ public class DepartmentManager {
     private EmployeeManager employeeManager;
 
     public DepartmentManager(FileHandler fileHandler) {
-        if (fileHandler == null) throw new IllegalArgumentException("FileHandler is required.");
+        if (fileHandler == null)
+            throw new IllegalArgumentException("FileHandler is required.");
         this.fileHandler = fileHandler;
         this.departments = new ArrayList<>();
     }
@@ -22,7 +23,8 @@ public class DepartmentManager {
     public void loadDepartments() throws IOException {
         List<Department> loaded = fileHandler.loadDepartments();
         departments.clear();
-        if (loaded != null) departments.addAll(loaded);
+        if (loaded != null)
+            departments.addAll(loaded);
 
         if (departments.isEmpty()) {
             departments.add(new Department(1, "IT"));
@@ -44,10 +46,13 @@ public class DepartmentManager {
     }
 
     public void addDepartment(int id, String name) throws ValidationException, IOException {
-        if (id <= 0) throw new ValidationException("Department ID must be a positive integer.");
+        if (id <= 0)
+            throw new ValidationException("Department ID must be a positive integer.");
         Validator.requireNotEmpty(name, "Department name");
-        if (isIdTaken(id)) throw new ValidationException("That department ID already exists.");
-        if (isNameTaken(name)) throw new ValidationException("That department name already exists.");
+        if (isIdTaken(id))
+            throw new ValidationException("That department ID already exists.");
+        if (isNameTaken(name))
+            throw new ValidationException("That department name already exists.");
 
         Department department = new Department(id, name.trim());
         departments.add(department);
@@ -61,21 +66,18 @@ public class DepartmentManager {
 
     public void deleteDepartment(int id) throws ValidationException, IOException {
         Department department = findById(id);
-        if (department == null) throw new ValidationException("Department was not found.");
+        if (department == null)
+            throw new ValidationException("Department was not found.");
 
         List<Employee> employees;
-        if (employeeManager == null) {
+        if (employeeManager == null)
             employees = fileHandler.loadEmployees();
-        } else {
+        else
             employees = employeeManager.getAllEmployees();
-        }
 
-        for (Employee employee : employees) {
-            if (employee.getDepartment() != null
-                    && employee.getDepartment().getId() == id) {
+        for (Employee employee : employees)
+            if (employee.getDepartment() != null && employee.getDepartment().getId() == id)
                 throw new ValidationException("This department still has employees. Reassign them before deleting it.");
-            }
-        }
 
         int index = departments.indexOf(department);
         departments.remove(index);
@@ -92,17 +94,18 @@ public class DepartmentManager {
     }
 
     public Department findById(int id) {
-        for (Department department : departments) {
-            if (department.getId() == id) return department;
-        }
+        for (Department department : departments)
+            if (department.getId() == id)
+                return department;
         return null;
     }
 
     public Department findByName(String name) {
-        if (name == null) return null;
-        for (Department department : departments) {
-            if (department.getName().equalsIgnoreCase(name.trim())) return department;
-        }
+        if (name == null)
+            return null;
+        for (Department department : departments)
+            if (department.getName().equalsIgnoreCase(name.trim()))
+                return department;
         return null;
     }
 
