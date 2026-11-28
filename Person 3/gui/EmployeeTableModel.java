@@ -8,7 +8,7 @@ import model.Employee;
 public class EmployeeTableModel extends AbstractTableModel {
     private List<Employee> employees;
 
-    private static final String[] COLUMN_NAMES = {
+    private final String[] columnNames = {
         "ID", "Name", "Age", "Department", "Position", "Type", "Salary"
     };
 
@@ -41,25 +41,12 @@ public class EmployeeTableModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return COLUMN_NAMES.length;
+        return columnNames.length;
     }
 
     @Override
     public String getColumnName(int column) {
-        return COLUMN_NAMES[column];
-    }
-
-    @Override
-    public Class<?> getColumnClass(int column) {
-        switch (column) {
-            case 0: // ID
-            case 2: // Age
-                return Integer.class;
-            case 6: // Salary
-                return Double.class;
-            default:
-                return String.class;
-        }
+        return columnNames[column];
     }
 
     @Override
